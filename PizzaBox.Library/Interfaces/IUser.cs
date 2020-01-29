@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PizzaBox.Library.Interfaces
 {
-    interface IUser
+   public interface IUser
     {
     }
 }

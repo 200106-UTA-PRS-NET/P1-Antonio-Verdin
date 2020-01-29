@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PizzaBox.Library.Library_Models
+namespace PizzaBox.Library.Models
 {
-    interface User
+    class Pizza
     {
     }
 }

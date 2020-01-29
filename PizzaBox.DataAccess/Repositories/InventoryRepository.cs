@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PizzaBox.Library.Library_Models
+namespace PizzaBox.DataAccess.Repositories
 {
-    interface Store
+    class InventoryRepository
     {
     }
 }
