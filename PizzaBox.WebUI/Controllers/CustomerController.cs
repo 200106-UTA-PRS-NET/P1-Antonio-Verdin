@@ -7,27 +7,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PizzaBox.WebUI.Controllers
 {
-    public class StoreController : Controller
+    public class CustomerController : Controller
     {
-        // GET: Store
+
+        PizzaBox.DataAccess.Models.PizzaBoxContext context;
+        public CustomerController(PizzaBox.DataAccess.Models.PizzaBoxContext context)
+        {
+            this.context = context;
+        }
+        // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Store/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(context.Orders);
         }
 
-        // GET: Store/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Store/Create
+        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -44,13 +50,13 @@ namespace PizzaBox.WebUI.Controllers
             }
         }
 
-        // GET: Store/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Store/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +73,13 @@ namespace PizzaBox.WebUI.Controllers
             }
         }
 
-        // GET: Store/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Store/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

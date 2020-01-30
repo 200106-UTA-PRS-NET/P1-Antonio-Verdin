@@ -9,23 +9,23 @@ using PizzaBox.DataAccess.Models;
 
 namespace PizzaBox.WebUI.Controllers
 {
-    public class CustomersController : Controller
+    public class PizzasController : Controller
     {
         private readonly PizzaBoxContext _context;
 
-        public CustomersController(PizzaBoxContext context)
+        public PizzasController(PizzaBoxContext context)
         {
             _context = context;
         }
 
-        // GET: Customers
+        // GET: Pizzas
         public async Task<IActionResult> Index()
         {
-            var pizzaBoxContext = _context.Customer.Include(c => c.AddressNavigation);
+            var pizzaBoxContext = _context.Pizza.Include(p => p.Order);
             return View(await pizzaBoxContext.ToListAsync());
         }
 
-        // GET: Customers/Details/5
+        // GET: Pizzas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +33,42 @@ namespace PizzaBox.WebUI.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .Include(c => c.AddressNavigation)
+            var pizza = await _context.Pizza
+                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (pizza == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(pizza);
         }
 
-        // GET: Customers/Create
+        // GET: Pizzas/Create
         public IActionResult Create()
         {
-            ViewData["Address"] = new SelectList(_context.Addressing, "Id", "Address1");
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Pizzas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,UserPassWord")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,OrderId,Amount")] Pizza pizza)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                _context.Add(pizza);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Address"] = new SelectList(_context.Addressing, "Id", "Address1", customer.Address);
-            return View(customer);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", pizza.OrderId);
+            return View(pizza);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Pizzas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +76,23 @@ namespace PizzaBox.WebUI.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
+            var pizza = await _context.Pizza.FindAsync(id);
+            if (pizza == null)
             {
                 return NotFound();
             }
-            ViewData["Address"] = new SelectList(_context.Addressing, "Id", "Address1", customer.Address);
-            return View(customer);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", pizza.OrderId);
+            return View(pizza);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Pizzas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,UserPassWord")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,Amount")] Pizza pizza)
         {
-            if (id != customer.Id)
+            if (id != pizza.Id)
             {
                 return NotFound();
             }
@@ -101,12 +101,12 @@ namespace PizzaBox.WebUI.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(pizza);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.Id))
+                    if (!PizzaExists(pizza.Id))
                     {
                         return NotFound();
                     }
@@ -117,11 +117,11 @@ namespace PizzaBox.WebUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Address"] = new SelectList(_context.Addressing, "Id", "Address1", customer.Address);
-            return View(customer);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", pizza.OrderId);
+            return View(pizza);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Pizzas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +129,31 @@ namespace PizzaBox.WebUI.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .Include(c => c.AddressNavigation)
+            var pizza = await _context.Pizza
+                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (pizza == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(pizza);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Pizzas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
+            var pizza = await _context.Pizza.FindAsync(id);
+            _context.Pizza.Remove(pizza);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool PizzaExists(int id)
         {
-            return _context.Customer.Any(e => e.Id == id);
+            return _context.Pizza.Any(e => e.Id == id);
         }
     }
 }

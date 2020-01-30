@@ -32,6 +32,7 @@ namespace PizzaBox.WebUI
             services.AddDbContext<PizzaBoxContext>(options => options.UseSqlServer(constr));
             services.AddScoped<IRepository<PizzaBox.Library.Models.Pizza>, Repository<PizzaBox.Library.Models.Pizza>>();
             
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
