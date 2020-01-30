@@ -7,7 +7,6 @@ namespace PizzaBox.Library.Interfaces
 {
     public interface IPizza: IRepository<Pizza>
     {
-        /*IEnumerable<Library.Models.Pizza> GetPizzasbyOrderId();
-        void AddPizza(Pizza);*/
+        IEnumerable<Library.Models.Pizza> GetPizzasbyOrderId();
     }
 }

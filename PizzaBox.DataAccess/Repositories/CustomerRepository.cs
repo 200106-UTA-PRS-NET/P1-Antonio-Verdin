@@ -6,6 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace PizzaBox.DataAccess.Repositories
 {
@@ -22,20 +26,24 @@ namespace PizzaBox.DataAccess.Repositories
         {
             return Mapper.Map(PizzaBoxContext.Customer.Find(id));
         }
-        IEnumerable<Library.Models.Customers>  GetAllCustomers()
-        {
-           return PizzaBoxContext.Customer.Select(Mapper.Map).ToList();
-
-        }
-
         void ICustomers.AddCustomer(Customers cust, Address add)
         {
-            throw new NotImplementedException();
+
+            PizzaBoxContext.Addressing.Add(Mapper.Map(add));
+            PizzaBoxContext.SaveChanges();
+            var temp =   PizzaBoxContext.Orders.OrderByDescending(p =>p.CustomerId==add.customer_id ).FirstOrDefault();
+            cust
+            PizzaBoxContext.Customer.Add(Mapper.Map(cust));
+            PizzaBoxContext.SaveChanges();
+
         }
 
         IEnumerable<Customers> ICustomers.GetAllCustomers()
         {
-            throw new NotImplementedException();
+            var query = from e in PizzaBoxContext.Customer
+                        select Mapper.Map(e);
+            return query;
+            
         }
 
         Customers ICustomers.GetCustomerbyId(int id)

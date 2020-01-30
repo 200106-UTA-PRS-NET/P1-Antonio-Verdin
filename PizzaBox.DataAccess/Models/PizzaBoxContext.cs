@@ -23,6 +23,7 @@ namespace PizzaBox.DataAccess.Models
         public virtual DbSet<Pizza> Pizza { get; set; }
         public virtual DbSet<PizzaIngredients> PizzaIngredients { get; set; }
         public virtual DbSet<Store> Store { get; set; }
+        public object Customers { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

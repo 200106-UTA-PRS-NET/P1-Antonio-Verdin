@@ -50,6 +50,12 @@ namespace PizzaBox.DataAccess
 
             };
         }
+
+        internal static Customer Map(Customers cust)
+        {
+            throw new NotImplementedException();
+        }
+
         public static Library.Models.Pizza Map(Models.Pizza pizza)
         {
             return new Library.Models.Pizza

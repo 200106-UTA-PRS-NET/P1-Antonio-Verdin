@@ -18,15 +18,7 @@ namespace PizzaBox.DataAccess.Repositories
         {
             get { return Context as PizzaBoxContext; }
         }
-       /* public IEnumerable<Library.Models.Store> GetStores(string search = null)
-        {
-            // disable unnecessary tracking for performance benefit
-        }*/
-        void AddUser(Library.Models.Customers cust, Library.Models.Address add)
-        {
 
-
-        }
 
 
     }

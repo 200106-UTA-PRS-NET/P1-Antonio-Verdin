@@ -8,6 +8,7 @@ namespace PizzaBox.Library.Models
     {
 
         public int? id { get; set; }
+        public int? AddressId { get; set; }
         private string _FirstName;
         private string _LastName;
         private string _Password;

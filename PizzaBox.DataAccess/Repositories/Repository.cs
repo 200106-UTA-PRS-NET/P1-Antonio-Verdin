@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PizzaBox.DataAccess.Models;
 using PizzaBox.Library.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,9 @@ namespace PizzaBox.DataAccess.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
-        public Repository(DbContext context)
+        protected readonly PizzaBoxContext Context;
+        
+        public Repository(PizzaBoxContext context)
         {
             Context = context;
         }
