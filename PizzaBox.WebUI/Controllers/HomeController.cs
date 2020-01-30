@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PizzaBox.DataAccess.Repositories;
 using PizzaBox.WebUI.Models;
 
 namespace PizzaBox.WebUI.Controllers
@@ -12,10 +13,12 @@ namespace PizzaBox.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Repository<PizzaRepository> _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Repository<PizzaRepository> repository)
         {
             _logger = logger;
+            _repo = repository;
         }
 
         public IActionResult Index()
