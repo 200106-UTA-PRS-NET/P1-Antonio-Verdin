@@ -7,7 +7,7 @@ namespace PizzaBox.Library.Models
    public class Address
     {
         
-       public int customer_id { get; set; }
+       public int? customer_id { get; set; }
         private string _City;
         private string _State;
         private string _PhoneNumber;

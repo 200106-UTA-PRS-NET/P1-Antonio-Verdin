@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PizzaBox.DataAccess.Models;
 using PizzaBox.DataAccess.Repositories;
+using PizzaBox.Library.Interfaces;
 
 namespace PizzaBox.WebUI
 {
@@ -27,8 +28,10 @@ namespace PizzaBox.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<PizzaBoxContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
-            services.AddScoped<Repository<PizzaRepository>, PizzaRepository>();
+            var constr = Configuration.GetConnectionString("sqlConnection");
+            services.AddDbContext<PizzaBoxContext>(options => options.UseSqlServer(constr));
+            services.AddScoped<IRepository<PizzaBox.Library.Models.Pizza>, Repository<PizzaBox.Library.Models.Pizza>>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

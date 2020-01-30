@@ -9,5 +9,6 @@ namespace PizzaBox.Library.Interfaces
     {
         IEnumerable<Store> GetAllStores();
 
+
     }
 }

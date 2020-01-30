@@ -22,20 +22,15 @@ namespace PizzaBox.DataAccess.Repositories
         {
             get { return Context as PizzaBoxContext; }
         }
-       Library.Models.Customers GetCustomerbyId(int id = 1)
-        {
-            return Mapper.Map(PizzaBoxContext.Customer.Find(id));
-        }
         void ICustomers.AddCustomer(Customers cust, Address add)
         {
 
             PizzaBoxContext.Addressing.Add(Mapper.Map(add));
             PizzaBoxContext.SaveChanges();
-            var temp =   PizzaBoxContext.Orders.OrderByDescending(p =>p.CustomerId==add.customer_id ).FirstOrDefault();
-            cust
+           //var temp =   PizzaBoxContext.Addressing.
+           // cust.id = temp.CustomerId;
             PizzaBoxContext.Customer.Add(Mapper.Map(cust));
             PizzaBoxContext.SaveChanges();
-
         }
 
         IEnumerable<Customers> ICustomers.GetAllCustomers()
@@ -48,8 +43,9 @@ namespace PizzaBox.DataAccess.Repositories
 
         Customers ICustomers.GetCustomerbyId(int id)
         {
-            throw new NotImplementedException();
+           return Mapper.Map( PizzaBoxContext.Customer.FirstOrDefault(e=>e.Id==id));
         }
+
         
     }
 }

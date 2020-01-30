@@ -51,7 +51,7 @@ namespace PizzaBox.DataAccess
             };
         }
 
-        internal static Customer Map(Customers cust)
+        public static Customer Map(Customers cust)
         {
             throw new NotImplementedException();
         }
@@ -67,6 +67,34 @@ namespace PizzaBox.DataAccess
             };
 
         }
+
+        public static Library.Models.Store Map(Models.Store store)
+        {
+            return new Library.Models.Store{
+                storename = store.Name,
+                id = store.Id
+            };
+
+        }
+        public static Library.Models.Orders Map(Models.Orders orders)
+        {
+            return new Library.Models.Orders{
+                Id = orders.Id,
+                TotalPrice = orders.TotalPrice,
+                PlaceDate = orders.PlaceDate,
+                DeliveryDate = orders.DeliveryDate,
+                StoreId = orders.StoreId
+                
+            };
+        }
+        public static Models.Orders Map(Library.Models.Orders orders) {
+            return new Models.Orders{
+                Id = orders.Id,
+                TotalPrice= orders.TotalPrice,
+                PlaceDate = DateTime.Now,
+                StoreId = orders.StoreId
+
+            }; }
 
 
     }

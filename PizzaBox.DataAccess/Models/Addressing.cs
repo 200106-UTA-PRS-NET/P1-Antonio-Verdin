@@ -19,5 +19,6 @@ namespace PizzaBox.DataAccess.Models
 
         public virtual ICollection<Customer> Customer { get; set; }
         public virtual ICollection<Store> Store { get; set; }
+        public int? CustomerId { get; internal set; }
     }
 }
