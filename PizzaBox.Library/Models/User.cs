@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PizzaBox.Library.Models
 {
-    class User
+   public class User
     {
     }
 }
