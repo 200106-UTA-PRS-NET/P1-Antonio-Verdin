@@ -12,7 +12,7 @@ namespace PizzaBox.WebUI.Controllers
         // GET: Start
         public ActionResult Index()
         {
-            return View("View1");
+            return View("log");
         }
 
         // GET: Start/Details/5
