@@ -21,7 +21,7 @@ namespace PizzaBox.WebUI.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var pizzaBoxContext = _context.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Store);
+            var pizzaBoxContext = _context.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o);
             return View(await pizzaBoxContext.ToListAsync());
         }
 
@@ -51,7 +51,7 @@ namespace PizzaBox.WebUI.Controllers
         {
             ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "FirstName");
             ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Username");
-            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id");
+            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Name");
             return View();
         }
 
@@ -89,7 +89,7 @@ namespace PizzaBox.WebUI.Controllers
             }
             ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "FirstName", orders.CustomerId);
             ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Username", orders.EmployeeId);
-            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id", orders.StoreId);
+            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Name", orders.StoreId);
             return View(orders);
         }
 

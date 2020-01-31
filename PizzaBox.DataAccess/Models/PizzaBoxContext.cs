@@ -24,13 +24,13 @@ namespace PizzaBox.DataAccess.Models
         public virtual DbSet<PizzaIngredients> PizzaIngredients { get; set; }
         public virtual DbSet<Store> Store { get; set; }
         public object Customers { get; internal set; }
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress01;Database=PizzaBox;Trusted_Connection=True;");
+
             }
         }
 

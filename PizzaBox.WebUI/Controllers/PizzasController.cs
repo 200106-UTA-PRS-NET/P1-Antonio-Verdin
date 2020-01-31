@@ -21,7 +21,7 @@ namespace PizzaBox.WebUI.Controllers
         // GET: Pizzas
         public async Task<IActionResult> Index()
         {
-            var pizzaBoxContext = _context.Pizza.Select(o=>o).Include(p => p);
+            var pizzaBoxContext = _context.Pizza.Include(p => p.Order);
             return View(await pizzaBoxContext.ToListAsync());
         }
 
