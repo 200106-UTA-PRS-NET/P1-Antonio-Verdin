@@ -31,6 +31,10 @@ namespace PizzaBox.WebUI
             var constr = Configuration.GetConnectionString("sqlConnection");
             services.AddDbContext<PizzaBoxContext>(options => options.UseSqlServer(constr));
             services.AddScoped<IRepository<PizzaBox.Library.Models.Pizza>, Repository<PizzaBox.Library.Models.Pizza>>();
+            services.AddScoped<IRepository<PizzaBox.Library.Models.Inventory>, Repository<PizzaBox.Library.Models.Inventory>>();
+            services.AddScoped<IRepository<PizzaBox.Library.Models.Store>, Repository<PizzaBox.Library.Models.Store>>();
+            
+
             
             
         }

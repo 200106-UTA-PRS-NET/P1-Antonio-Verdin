@@ -5,36 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.DataAccess;
+using PizzaBox.DataAccess.Models;
 
 namespace PizzaBox.WebUI.Controllers
 {
-    public class CustomerController : Controller
+    public class StoreController : Controller
     {
+        private readonly PizzaBoxContext _context;
 
-        PizzaBox.DataAccess.Models.PizzaBoxContext context;
-        public CustomerController(PizzaBox.DataAccess.Models.PizzaBoxContext context)
+        public StoreController(PizzaBoxContext context)
         {
-            this.context = context;
+            _context = context;
         }
-        // GET: Customer
+        // GET: Store
         public ActionResult Index()
         {
-            return View(context.Customer.Select(o => Mapper.Map(o.Id == 1)));
+            var stores = _context.Store.Select(o => Mapper.Map(o)).ToList();
+            return View(stores);
         }
 
-        // GET: Customer/Details/5
+        // GET: Store/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Customer/Create
+        // GET: Store/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customer/Create
+        // POST: Store/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -51,13 +53,13 @@ namespace PizzaBox.WebUI.Controllers
             }
         }
 
-        // GET: Customer/Edit/5
+        // GET: Store/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Customer/Edit/5
+        // POST: Store/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -74,13 +76,13 @@ namespace PizzaBox.WebUI.Controllers
             }
         }
 
-        // GET: Customer/Delete/5
+        // GET: Store/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Customer/Delete/5
+        // POST: Store/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

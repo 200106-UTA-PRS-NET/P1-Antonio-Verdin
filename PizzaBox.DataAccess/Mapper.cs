@@ -29,6 +29,12 @@ namespace PizzaBox.DataAccess
 
             };
         }
+
+        public static object Map(bool v)
+        {
+            throw new NotImplementedException();
+        }
+
         public static Addressing Map(Address address)
         {
             return new Addressing()
@@ -70,7 +76,7 @@ namespace PizzaBox.DataAccess
 
         public static Library.Models.Store Map(Models.Store store)
         {
-            return new Library.Models.Store{
+            return new Library.Models.Store(){
                 storename = store.Name,
                 id = store.Id
             };
