@@ -24,8 +24,6 @@ namespace PizzaBox.DataAccess.Repositories
 
             PizzaBoxContext.Addressing.Add(Mapper.Map(add));
             PizzaBoxContext.SaveChanges();
-           //var temp =   PizzaBoxContext.Addressing.
-           // cust.id = temp.CustomerId;
             PizzaBoxContext.Customer.Add(Mapper.Map(cust));
             PizzaBoxContext.SaveChanges();
         }

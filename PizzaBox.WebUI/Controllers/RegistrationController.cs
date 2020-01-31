@@ -4,14 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PizzaBox.DataAccess.Models;
+using PizzaBox.Library.Interfaces;
 
 namespace PizzaBox.WebUI.Controllers
 {
     public class RegistrationController : Controller
     {
+        private readonly  IRepository<PizzaBox.Library.Models.Customers> _rep;
+
+        public RegistrationController(PizzaBoxContext context)
+        {
+            _rep = context;
+        }
         // GET: Registration
         public ActionResult Index()
         {
+            var x = _rep.GetAll();
             return View("RegistrationPage");
         }
 
